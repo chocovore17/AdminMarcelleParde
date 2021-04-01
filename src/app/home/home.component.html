@@ -26,8 +26,8 @@
             </label>
           </div>
           
-          <div class="wrap-input100 validate-input" data-validate="Veuillez entrer le prénom de l'élève ">
-            <input class="input100"  formControlName="newValue"  id="firstname" type="text" name="firstname" placeholder="Prénom" #prenom>
+          <div class="wrap-input100 validate-input" data-validate="Veuillez entrer le nom de famille de l'élève ">
+            <input class="input100"  formControlName="newValue"  id="lastname" type="text" name="lastname" placeholder="Nom de famille" #nom>
             <label class="label-input100" for="firsname">
               <span class="lnr lnr-user"></span>
             </label>
@@ -52,11 +52,13 @@
           <div class="container-contact100-form-btn">
             <div class="wrap-contact100-form-btn">
               <div class="contact100-form-bgbtn"></div>
-              <button (click)="onQuery(classe.value, prenom.value);" class="contact100-form-btn">
+              <button (click)="onQuery(classe.value, nom.value);" class="contact100-form-btn">
                 Soumettre
               </button>
             </div>
           </div>
+          <div>{{this.message}}</div>
+          <div>Nom de l'élève: {{this.tmp}}</div>
         </form>
       </div>
     </div>
