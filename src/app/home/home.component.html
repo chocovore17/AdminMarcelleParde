@@ -1,0 +1,105 @@
+<!-- <form [formGroup]="this.secondForm">
+    <input
+      placeholder="value1"
+      formControlName="valueToGet"
+      type="text"
+      class="input-field col s12"
+    />
+    <button (click)="onQuery()">
+      Query
+    </button>
+  </form> -->
+
+  <ng-container *ngIf="show">
+    <div class="container-contact100"id="questionnaire">
+      <!-- <img class='topleft' src="./../../assets/images/logo.jfif" alt="School logo" width=200 height=500> -->
+      <div class="wrap-contact100">
+        <form class="contact100-form validate-form"  [formGroup]="this.form">
+          <span class="contact100-form-title">
+            Cantine du Lycée Marcelle Pardé - Chercher un élève 
+          </span>
+  
+          <div class="wrap-input100 validate-input" data-validate="Entrez la classe de l'élève, ex: 2ECP">
+            <input class="input100"  formControlName="newValue"  id="classe" type="text" name="classe" placeholder="Classe " #classe>
+            <label class="label-input100" for="classe">
+              <span class="lnr lnr-user"></span>
+            </label>
+          </div>
+          
+          <div class="wrap-input100 validate-input" data-validate="Veuillez entrer le prénom de l'élève ">
+            <input class="input100"  formControlName="newValue"  id="firstname" type="text" name="firstname" placeholder="Prénom" #prenom>
+            <label class="label-input100" for="firsname">
+              <span class="lnr lnr-user"></span>
+            </label>
+          </div>
+  
+          <!-- <div class="wrap-input100 validate-input" data-validate = "Example, 1ère ">
+            <input class="input100"  formControlName="newValue" id="classe" type="text" name="classe" placeholder="Classe" #classe>
+            <label class="label-input100" for="classe">
+              <span class="lnr lnr-envelope"></span>
+            </label>
+          </div> -->
+         
+  
+          <!-- <div class="contact100-form-checkbox">
+            <input class="input-checkbox100" id="ckb1" type="checkbox" [checked]="checkboxValue" (change)="checkboxValue = !checkboxValue" />
+            <label class="label-checkbox100" for="ckb1">
+              Régime pensionnaire
+            </label>
+          </div> -->
+          
+  
+          <div class="container-contact100-form-btn">
+            <div class="wrap-contact100-form-btn">
+              <div class="contact100-form-bgbtn"></div>
+              <button (click)="onQuery(classe.value, prenom.value);" class="contact100-form-btn">
+                Soumettre
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </ng-container>
+  
+    <ng-container *ngIf="!show">
+    <div class="container-contact100"id="questionnaire">
+      <img class='topleft' src="./../../assets/images/logo.jfif" alt="School logo" width=200 height=500>
+      <div class="wrap-contact100">
+        <form class="contact100-form validate-form"  [formGroup]="this.form">
+          <span class="contact100-form-title">
+            Merci pour votre participation ! 
+          </span>
+        </form>
+      </div>
+    </div>
+    </ng-container>
+  
+  
+  
+    <div id="dropDownSelect1"></div>
+  
+  <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+  <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+  
+  <p style="color: red;">{{message || null}}</p>
+
+<div *ngIf="single">
+  <h1>{{single.field}}</h1>
+  <button style="background-color: lightblue">Edit</button>
+  <button style="background-color: red">Delete</button>
+</div>
