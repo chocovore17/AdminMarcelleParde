@@ -4,6 +4,8 @@ import { AngularFirestore, fromCollectionRef } from "@angular/fire/firestore";
 import { FormControl, FormGroup } from "@Angular/forms";
 import { formatDate } from '@angular/common';
 import { COVIDData } from './COVIDdata';
+import * as XLSX from 'xlsx'; 
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +21,7 @@ export class HomeComponent implements OnInit {
   fullname = '';
   today = new Date();
   message: string;
+  fileName= 'CasContacts.xlsx';  
   form = new FormGroup({
     newValue: new FormControl('')
   })
@@ -31,6 +34,21 @@ export class HomeComponent implements OnInit {
   showResults() {
     this.show = true;
   }
+  
+exportexcel(): void 
+{
+   /* table id is passed over here */   
+   let element = document.getElementById('excel-table'); 
+   const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+   /* generate workbook and add the worksheet */
+   const wb: XLSX.WorkBook = XLSX.utils.book_new();
+   XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+   /* save to file */
+   XLSX.writeFile(wb, this.fileName);
+  
+}
   createDateArray(jours: number) {
     var datearray: string[] = [];
     if (jours < 1) jours = 7;

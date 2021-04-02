@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from "@Angular/forms";
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 import { HomeComponent } from './home/home.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HomeComponent } from './home/home.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, 
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

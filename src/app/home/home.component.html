@@ -54,9 +54,13 @@
   <!-- <div>Nom de l'élève: {{this.tmp}}</div> -->
   <!-- add name, class to print on top & pretty print  -->
   <ng-container *ngIf="show" #table>
-
-    <table class="table table-hover">
+    
+    <table class="table table-hover"  id="excel-table">
       <thead>
+        <a style="cursor: pointer" (click)="exportexcel()">
+          <img src="./../../assets/images/downloadicon.svg" alt="download icon">
+          <a>Exporter en excel</a>
+        </a>
         <tr>
           <th scope="col">Date </th>
           <th scope="col" colspan="2">Prénom Nom et Classe de chaque élève assis à la cantine avec {{this.fullname}}</th>
@@ -73,22 +77,7 @@
 
 </div>
 
-<!-- <ng-container *ngIf="!show">
-  <div class="container-contact100" id="questionnaire">
-    <img class='topleft' src="./../../assets/images/logo.jfif" alt="School logo" width=200 height=500>
-    <div class="wrap-contact100">
-      <form class="contact100-form validate-form" [formGroup]="this.form">
-        <span class="contact100-form-title">
-          Merci pour votre participation !
-        </span>
-      </form>
-    </div>
-  </div>
-</ng-container> -->
 
-
-
-<div id="dropDownSelect1"></div>
 
 <!--===============================================================================================-->
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
