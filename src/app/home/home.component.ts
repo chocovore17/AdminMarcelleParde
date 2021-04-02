@@ -105,8 +105,7 @@ exportexcel(): void
       setTimeout(() => {
         resolve(
           this.curr_covidData.forEach(item => {
-            var cascontactscejour = [];
-            cascontactscejour.push(item.date);
+            // cascontactscejour.push(item.date);
             this.firestore.collection("MarcelleParde").doc(item.date).collection(item.table).get()
               .subscribe((ss) => {
                 ss.docs.forEach((doc) => {
@@ -116,11 +115,17 @@ exportexcel(): void
                       console.log(this.fullname);
                     }
                     else{
-                    cascontactscejour.push(doc.data().prenom + ' ' + doc.data().nom + ', classe : ' + doc.data().classe);
+                      var cascontactscejour = [];
+                      cascontactscejour.push(item.date);
+                      cascontactscejour.push(doc.data().prenom);
+                      cascontactscejour.push(doc.data().nom);
+                      cascontactscejour.push(doc.data().classe);
+                      this.CasContacts.push(cascontactscejour);
+                    // cascontactscejour.push(doc.data().prenom + ' ' + doc.data().nom + ', classe : ' + doc.data().classe);
                     }
                   }
                 })
-                this.CasContacts.push(cascontactscejour);
+                // this.CasContacts.push(cascontactscejour);
               })
           }));
       }, 600);
