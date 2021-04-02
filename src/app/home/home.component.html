@@ -53,19 +53,17 @@
   </div>
   <!-- <div>Nom de l'élève: {{this.tmp}}</div> -->
   <!-- add name, class to print on top & pretty print  -->
-  <ng-container *ngIf="show">
+  <ng-container *ngIf="show" #table>
 
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">Date </th>
-          <th scope="col">Nom, prénom et classe</th>
-          <!-- <th scope="col">Column heading</th> -->
-          <!-- <th scope="col">Column heading</th> -->
+          <th scope="col" colspan="2">Prénom Nom et Classe de chaque élève assis à la cantine avec {{this.fullname}}</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="table-success" *ngFor="let int of this.CasContacts;let indexOfelement=index;">
+        <tr class="table-info" *ngFor="let int of this.CasContacts;let indexOfelement=index;">
           <!-- <th scope="row">{{indexOfelement}}</th> -->
           <td *ngFor="let value of int">{{value}}</td>
         </tr>

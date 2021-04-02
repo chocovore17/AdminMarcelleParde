@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   CasContacts = [];
   public show: boolean = false;
   jstoday = '';
+  fullname = '';
   today = new Date();
   message: string;
   form = new FormGroup({
@@ -56,7 +57,7 @@ export class HomeComponent implements OnInit {
     return datearray;
   }
   
-  async findTablesAndDates(nom, datearray) {
+  async findTablesAndDates( nom, datearray) {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(
@@ -81,7 +82,7 @@ export class HomeComponent implements OnInit {
     });
       }
 
-  async findPeopleAtRisk() {
+  async findPeopleAtRisk(nom) {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(
@@ -92,7 +93,13 @@ export class HomeComponent implements OnInit {
               .subscribe((ss) => {
                 ss.docs.forEach((doc) => {
                   if (typeof doc.data().nom !== "undefined" && typeof doc.data().classe !== "undefined") {
-                    cascontactscejour.push(doc.data().prenom + ' ' + doc.data().nom + ', classe : ' + doc.data().classe + '\n');
+                    if(doc.data().nom == nom){
+                      this.fullname = doc.data().nom+', '+doc.data().prenom + ', '+doc.data().classe;
+                      console.log(this.fullname);
+                    }
+                    else{
+                    cascontactscejour.push(doc.data().prenom + ' ' + doc.data().nom + ', classe : ' + doc.data().classe);
+                    }
                   }
                 })
                 this.CasContacts.push(cascontactscejour);
@@ -113,7 +120,7 @@ export class HomeComponent implements OnInit {
       console.log("find tables and dates should be done first ");
       this.CasContacts = [];
       this.findTablesAndDates(nom, datearray).then(value => {
-        this.findPeopleAtRisk();
+        this.findPeopleAtRisk(nom);
       });
       // num = await this.findPeopleAtRisk();
       // console.log("find people at risk should be done second ");
