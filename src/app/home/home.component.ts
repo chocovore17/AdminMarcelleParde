@@ -132,16 +132,16 @@ exportexcel(): void
     });
   }
 
-  async onQuery(nom: string, jours = 7) { //default display for a week
+  async onQuery(nom: string, prenom:string, jours = 7) { //default display for a week
     // reset all arrays to print only data asked for 
     this.curr_covidData = [];
-    if (!nom) {
-      this.message = 'Entrez un nom de famille à rechercher';
+    if (!nom || !prenom) {
+      this.message = 'Entrez un nom de famille et un prénom à rechercher';
     } else {
       var datearray = this.createDateArray(jours);
-      // var num = await this.findTablesAndDates(nom, datearray);
       console.log("find tables and dates should be done first ");
       this.CasContacts = [];
+      nom += ", "+ prenom;
       this.findTablesAndDates(nom, datearray).then(value => {
         this.findPeopleAtRisk(nom);
       });
@@ -152,16 +152,8 @@ exportexcel(): void
 
   }
 }
-
-//  // 1: search  and add to curr covid data for last 7 days 
-//  this.findTablesAndDates(nom, datearray);
-
-//  this.CasContacts = [];
-//  console.log(this.curr_covidData);
-//  // find people who were in contact from tuple (day, table)
-//  this.findPeopleAtRisk();
-//  console.log("now cas contacts is", this.CasContacts);
-// TO : 
-//  fix double press button 
-// looks
-// freaking bug
+// TODO 
+// Capital pas capital letters
+// logo
+//  remettre nom et prénom élève
+// nom et prénom 

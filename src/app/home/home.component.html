@@ -3,7 +3,7 @@
   <div class="wrap-contact100">
     <form class="contact100-form validate-form" [formGroup]="this.form">
       <span class="contact100-form-title">
-        Cantine du Lycée Marcelle Pardé - Rechercher des élèves à risques
+        Restaurant scolaire Lycée Marcelle Pardé - Rechercher cas contacts
       </span>
 
 
@@ -14,40 +14,32 @@
           <span class="lnr lnr-user"></span>
         </label>
       </div>
+      
+      <div class="wrap-input100 validate-input" data-validate="Veuillez entrer le nom de famille de l'élève ">
+        <input class="input100" formControlName="newValue" id="firstname" type="text" name="firstname"
+          placeholder="Prénom" #prenom>
+        <label class="label-input100" for="firstname">
+          <span class="lnr lnr-user"></span>
+        </label>
+      </div>
 
       <div class="wrap-input100 validate-input" data-validate="Combien de jours souhaitez-vous afficher ? (champ optionnel)">
         <input class="input100" formControlName="newValue" id="jours" type="text" name="jours"
-          placeholder="durée de transmission (défaut = 7 jours)" #jours>
+          placeholder="Champ optionnel : durée de transmission (défaut = 7 jours)" #jours>
         <label class="label-input100" for="jours">
           <span class="lnr lnr-user"></span>
         </label>
       </div>
 
-      <!-- <div class="wrap-input100 validate-input" data-validate = "Example, 1ère ">
-            <input class="input100"  formControlName="newValue" id="classe" type="text" name="classe" placeholder="Classe" #classe>
-            <label class="label-input100" for="classe">
-              <span class="lnr lnr-envelope"></span>
-            </label>
-          </div> -->
-
-
-      <!-- <div class="contact100-form-checkbox">
-            <input class="input-checkbox100" id="ckb1" type="checkbox" [checked]="checkboxValue" (change)="checkboxValue = !checkboxValue" />
-            <label class="label-checkbox100" for="ckb1">
-              Régime pensionnaire
-            </label>
-          </div> -->
-
 
       <div class="container-contact100-form-btn">
         <div class="wrap-contact100-form-btn">
           <div class="contact100-form-bgbtn"></div>
-          <button (click)="onQuery( nom.value, jours.value);showResults();" class="contact100-form-btn">
+          <button (click)="onQuery( nom.value, prenom.value, jours.value);showResults();" class="contact100-form-btn">
             Soumettre
           </button>
         </div>
       </div>
-      <!-- <div>{{this.message}}</div> -->
 
     </form>
   </div>
