@@ -46,9 +46,9 @@
   <!-- <div>Nom de l'élève: {{this.tmp}}</div> -->
   <!-- add name, class to print on top & pretty print  -->
   <ng-container *ngIf="show" #table>
-    
     <table class="table table-hover"  id="excel-table">
       <thead>
+        <div>Liste des cas contacts pour {{this.fullname}}:</div>
         <a style="cursor: pointer" (click)="exportexcel()">
           <img src="./../../assets/images/downloadicon.svg" alt="download icon">
           <a>Exporter en excel</a>

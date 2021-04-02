@@ -110,7 +110,7 @@ exportexcel(): void
               .subscribe((ss) => {
                 ss.docs.forEach((doc) => {
                   if (typeof doc.data().nom !== "undefined" && typeof doc.data().classe !== "undefined") {
-                    if(doc.data().nom == nom){
+                    if(nom.includes(doc.data().nom)){
                       this.fullname = doc.data().nom+', '+doc.data().prenom + ', '+doc.data().classe;
                       console.log(this.fullname);
                     }
@@ -156,4 +156,3 @@ exportexcel(): void
 // Capital pas capital letters
 // logo
 //  remettre nom et prénom élève
-// nom et prénom 
