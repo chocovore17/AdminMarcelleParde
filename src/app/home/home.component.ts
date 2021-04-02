@@ -131,13 +131,27 @@ exportexcel(): void
       }, 600);
     });
   }
-
+   toTitleCase(str) {
+    return str.replace(
+      /\w\S*/g,
+      function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      }
+    );
+  }
   async onQuery(nom: string, prenom:string, jours = 7) { //default display for a week
     // reset all arrays to print only data asked for 
     this.curr_covidData = [];
     if (!nom || !prenom) {
       this.message = 'Entrez un nom de famille et un prénom à rechercher';
     } else {
+      nom = this.toTitleCase(nom);
+      nom = nom.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      prenom = this.toTitleCase(prenom);
+      prenom = prenom.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+
+      // format nom
+      // format prenom
       var datearray = this.createDateArray(jours);
       console.log("find tables and dates should be done first ");
       this.CasContacts = [];
@@ -145,14 +159,8 @@ exportexcel(): void
       this.findTablesAndDates(nom, datearray).then(value => {
         this.findPeopleAtRisk(nom);
       });
-      // num = await this.findPeopleAtRisk();
-      // console.log("find people at risk should be done second ");
 
     }
 
   }
 }
-// TODO 
-// Capital pas capital letters
-// logo
-//  remettre nom et prénom élève

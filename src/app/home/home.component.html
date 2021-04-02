@@ -1,4 +1,5 @@
 <div class="container-contact100" id="questionnaire">
+  <img class='topleft' src="./../../assets/images/logo.jfif" alt="School logo" width=170 height=400>
   <!-- <img class='topleft' src="./../../assets/images/logo.jfif" alt="School logo" width=200 height=500> -->
   <div class="wrap-contact100">
     <form class="contact100-form validate-form" [formGroup]="this.form">
@@ -35,7 +36,7 @@
       <div class="container-contact100-form-btn">
         <div class="wrap-contact100-form-btn">
           <div class="contact100-form-bgbtn"></div>
-          <button (click)="onQuery( nom.value, prenom.value, jours.value);showResults();" class="contact100-form-btn">
+          <button (click)="onQuery( nom.value , prenom.value, jours.value);showResults();" class="contact100-form-btn">
             Soumettre
           </button>
         </div>
