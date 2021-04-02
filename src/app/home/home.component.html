@@ -1,117 +1,111 @@
-<!-- <form [formGroup]="this.secondForm">
-    <input
-      placeholder="value1"
-      formControlName="valueToGet"
-      type="text"
-      class="input-field col s12"
-    />
-    <button (click)="onQuery()">
-      Query
-    </button>
-  </form> -->
+<div class="container-contact100" id="questionnaire">
+  <!-- <img class='topleft' src="./../../assets/images/logo.jfif" alt="School logo" width=200 height=500> -->
+  <div class="wrap-contact100">
+    <form class="contact100-form validate-form" [formGroup]="this.form">
+      <span class="contact100-form-title">
+        Cantine du Lycée Marcelle Pardé - Chercher un élève
+      </span>
 
-  <ng-container *ngIf="show">
-    <div class="container-contact100"id="questionnaire">
-      <!-- <img class='topleft' src="./../../assets/images/logo.jfif" alt="School logo" width=200 height=500> -->
-      <div class="wrap-contact100">
-        <form class="contact100-form validate-form"  [formGroup]="this.form">
-          <span class="contact100-form-title">
-            Cantine du Lycée Marcelle Pardé - Chercher un élève 
-          </span>
-  
-          <div class="wrap-input100 validate-input" data-validate="Entrez la classe de l'élève, ex: 2ECP">
-            <input class="input100"  formControlName="newValue"  id="classe" type="text" name="classe" placeholder="Classe " #classe>
-            <label class="label-input100" for="classe">
-              <span class="lnr lnr-user"></span>
-            </label>
-          </div>
-          
-          <div class="wrap-input100 validate-input" data-validate="Veuillez entrer le nom de famille de l'élève ">
-            <input class="input100"  formControlName="newValue"  id="lastname" type="text" name="lastname" placeholder="Nom de famille" #nom>
-            <label class="label-input100" for="lastname">
-              <span class="lnr lnr-user"></span>
-            </label>
-          </div>
-          
-          <div class="wrap-input100 validate-input" data-validate="Veuillez entrer le prenom de l'élève ">
-            <input class="input100"  formControlName="newValue"  id="firstname" type="text" name="firstname" placeholder="Prenom" #firstname>
-            <label class="label-input100" for="firsname">
-              <span class="lnr lnr-user"></span>
-            </label>
-          </div>
-  
-          <!-- <div class="wrap-input100 validate-input" data-validate = "Example, 1ère ">
+
+      <div class="wrap-input100 validate-input" data-validate="Veuillez entrer le nom de famille de l'élève ">
+        <input class="input100" formControlName="newValue" id="lastname" type="text" name="lastname"
+          placeholder="Nom de famille" #nom>
+        <label class="label-input100" for="lastname">
+          <span class="lnr lnr-user"></span>
+        </label>
+      </div>
+
+      <div class="wrap-input100 validate-input" data-validate="Combien de jours souhaitez-vous afficher ? (champ optionnel)">
+        <input class="input100" formControlName="newValue" id="jours" type="text" name="jours"
+          placeholder="durée de transmission (défaut = 7 jours)" #jours>
+        <label class="label-input100" for="jours">
+          <span class="lnr lnr-user"></span>
+        </label>
+      </div>
+
+      <!-- <div class="wrap-input100 validate-input" data-validate = "Example, 1ère ">
             <input class="input100"  formControlName="newValue" id="classe" type="text" name="classe" placeholder="Classe" #classe>
             <label class="label-input100" for="classe">
               <span class="lnr lnr-envelope"></span>
             </label>
           </div> -->
-         
-  
-          <!-- <div class="contact100-form-checkbox">
+
+
+      <!-- <div class="contact100-form-checkbox">
             <input class="input-checkbox100" id="ckb1" type="checkbox" [checked]="checkboxValue" (change)="checkboxValue = !checkboxValue" />
             <label class="label-checkbox100" for="ckb1">
               Régime pensionnaire
             </label>
           </div> -->
-          
-  
-          <div class="container-contact100-form-btn">
-            <div class="wrap-contact100-form-btn">
-              <div class="contact100-form-bgbtn"></div>
-              <button (click)="onQuery(classe.value, nom.value, firstname.value);" class="contact100-form-btn">
-                Soumettre
-              </button>
-            </div>
-          </div>
-          <!-- <div>{{this.message}}</div> -->
-          <div>Nom de l'élève: {{this.tmp}}</div>
-          <div>Cas contacts pour chaque jour (décroissant)</div>
-          <div>JOUR - 1</div>
-          <div>{{this.jour1}}</div>
-        </form>
-      </div>
-    </div>
-    </ng-container>
-  
-    <ng-container *ngIf="!show">
-    <div class="container-contact100"id="questionnaire">
-      <img class='topleft' src="./../../assets/images/logo.jfif" alt="School logo" width=200 height=500>
-      <div class="wrap-contact100">
-        <form class="contact100-form validate-form"  [formGroup]="this.form">
-          <span class="contact100-form-title">
-            Merci pour votre participation ! 
-          </span>
-        </form>
-      </div>
-    </div>
-    </ng-container>
-  
-  
-  
-    <div id="dropDownSelect1"></div>
-  
-  <!--===============================================================================================-->
-    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-  <!--===============================================================================================-->
-    <script src="vendor/animsition/js/animsition.min.js"></script>
-  <!--===============================================================================================-->
-    <script src="vendor/bootstrap/js/popper.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-  <!--===============================================================================================-->
-    <script src="vendor/select2/select2.min.js"></script>
-  <!--===============================================================================================-->
-    <script src="vendor/daterangepicker/moment.min.js"></script>
-    <script src="vendor/daterangepicker/daterangepicker.js"></script>
-  <!--===============================================================================================-->
-    <script src="vendor/countdowntime/countdowntime.js"></script>
-  <!--===============================================================================================-->
-    <script src="js/main.js"></script>
-  
-  <p style="color: red;">{{message || null}}</p>
 
-<div *ngIf="single">
-  <h1>{{single.field}}</h1>
-  <button style="background-color: lightblue">Edit</button>
-  <button style="background-color: red">Delete</button>
+
+      <div class="container-contact100-form-btn">
+        <div class="wrap-contact100-form-btn">
+          <div class="contact100-form-bgbtn"></div>
+          <button (click)="onQuery( nom.value, jours.value);showResults();" class="contact100-form-btn">
+            Soumettre
+          </button>
+        </div>
+      </div>
+      <!-- <div>{{this.message}}</div> -->
+
+    </form>
+  </div>
+  <!-- <div>Nom de l'élève: {{this.tmp}}</div> -->
+  <!-- add name, class to print on top & pretty print  -->
+  <ng-container *ngIf="show">
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Date </th>
+          <th scope="col">Nom, prénom et classe</th>
+          <!-- <th scope="col">Column heading</th> -->
+          <!-- <th scope="col">Column heading</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-success" *ngFor="let int of this.CasContacts;let indexOfelement=index;">
+          <!-- <th scope="row">{{indexOfelement}}</th> -->
+          <td *ngFor="let value of int">{{value}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
 </div>
+
+<!-- <ng-container *ngIf="!show">
+  <div class="container-contact100" id="questionnaire">
+    <img class='topleft' src="./../../assets/images/logo.jfif" alt="School logo" width=200 height=500>
+    <div class="wrap-contact100">
+      <form class="contact100-form validate-form" [formGroup]="this.form">
+        <span class="contact100-form-title">
+          Merci pour votre participation !
+        </span>
+      </form>
+    </div>
+  </div>
+</ng-container> -->
+
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/daterangepicker/moment.min.js"></script>
+<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="js/main.js"></script>
+

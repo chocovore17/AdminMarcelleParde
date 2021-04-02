@@ -12,16 +12,12 @@ import { COVIDData } from './COVIDdata';
 })
 
 export class HomeComponent implements OnInit {
-  curr_covidData: COVIDData[] = [];
-  show = true;
+  curr_covidData = [];
+  CasContacts = [];
+  public show:boolean = false;
   jstoday = '';
   today = new Date();
-  myArray: any[] = [];
   message: string;
-  single: any;
-  jour1: string;
-  tmp: string;
-  secondForm = new FormGroup({ valueToGet: new FormControl('') })
   form = new FormGroup({
     newValue: new FormControl('')
   })
@@ -30,30 +26,22 @@ export class HomeComponent implements OnInit {
     this.jstoday = formatDate(this.today, 'dd-MM-yyyy', 'en-US');
   }
 
-  ngOnInit(): void {
-    //   this.firestore
-    // .collection("testCollection")
-    // .get()
-    // .subscribe((ss) => {
-    //   ss.docs.forEach((doc) => {
-    //     this.myArray.push(doc.data());
-    //   });
-    // });
-
+  ngOnInit(): void {}
+  showResults(){
+    this.show = true;
   }
 
-
-  onQuery(classe: string, nom: string, prenom: string) {
+  onQuery( nom: string, jours: number = 7) { //default display for a week
+    // reset all arrays to print only data asked for 
+    var listtables = [];
+    var listdates= [];
+    this.curr_covidData = [];
+    var out = this.firestore.collection("MarcelleParde");
     if (!nom) {
       this.message = 'Entrez un nom de famille à rechercher';
-      this.single = null;
-    } if (!classe) {
-      this.message = 'Entrez une classe svp';
-      this.single = null;
-    } else {
+    }  else {
       var datearray : string[]=[];
-      var tables : any[]=[];
-      for (var i = 0; i < 7; i++) {
+      for (var i = 0; i < jours; i++) {
         var dayexact = parseInt(this.jstoday.substring(0, 2));
         var monthexact = parseInt(this.jstoday.substring(3, 5));
         dayexact -= i;
@@ -73,81 +61,50 @@ export class HomeComponent implements OnInit {
         // put this in a function
         datearray.push(theday + "-" + themonth + this.jstoday.substring(5));
       }
-        // 1: search  and add to curr covid data for last 7 days 
-        var out = this.firestore.collection("MarcelleParde");
-        out.get()
-          .subscribe(ss => {
-            // issue with the date idk why
-            if (ss.docs.length === 0) {
-              this.message = "Le lycée n'existe pas dans la database.";
-              this.single = null;
-            } else {
-              ss.docs.forEach(doc => {
-                var keyvalue = doc.data();
-                if (nom in keyvalue&& datearray.includes(doc.id)) {
-                  var all_covid_data : COVIDData = new COVIDData();
-                  all_covid_data.table = keyvalue[nom];
-                  all_covid_data.date=doc.id;
-                  this.curr_covidData.push(all_covid_data);
-                }
-              })
+      // 1: search  and add to curr covid data for last 7 days 
+      out.get()
+      .subscribe(ss => {
+        // issue with the date idk why
+        if (ss.docs.length === 0) {
+          this.message = "Le lycée n'existe pas dans la database.";
+        } else {
+          ss.docs.forEach(doc => {
+            var keyvalue = doc.data();
+            if (nom in keyvalue&& datearray.includes(doc.id)) {
+              var all_covid_data : COVIDData = new COVIDData(keyvalue[nom], doc.id);
+              this.curr_covidData.push(all_covid_data);
+              listtables.push(keyvalue[nom]);
+              listdates.push(doc.id);
             }
-          });
-
-      for (var i = 0; i < this.curr_covidData.length; i++) {
-        var casContact = this.firestore.collection("MarcelleParde").doc(this.curr_covidData[i].date).collection(this.curr_covidData[i].table);
-        casContact.get()
-          .subscribe(ss => {
-            if (ss.docs.length === 0) { console.log("not found anyone, he eats alone?")}//do nothing if he eats alone 
-            else {
-              ss.docs.forEach(doc => {
-                console.log("============================================");
-                console.log(doc.data());
-                // i=0, add to jour 1, etc for each day and print out
-              })
-            }
-          });
-      }
+          })
+        }
+      });
+      listdates.forEach(item=>{
+        console.log(item);
+        console.log(item);
+      })
+      this.CasContacts = [];
+      // find people who were in contact from tuple (day, table)
+      this.curr_covidData.forEach(item =>{
+        var cascontactscejour = [];
+        cascontactscejour.push(item.date);
+         this.firestore.collection("MarcelleParde").doc(item.date).collection(item.table).get()
+          .subscribe((ss) => {
+            ss.docs.forEach((doc) => {
+               if(typeof doc.data().nom !== "undefined" && typeof doc.data().classe !== "undefined"){
+                cascontactscejour.push(doc.data().prenom+ ' ' + doc.data().nom+ ', classe : '+ doc.data().classe+'\n');
+               }
+            })
+            this.CasContacts.push(cascontactscejour);
+          })
+         });
     }
+    console.log(this.CasContacts);
 
-
-    // var out = this.firestore.collection(classe).doc(nom+", "+prenom).collection(this.jstoday);
-    // out.get()
-    //   .subscribe(ss => {
-    //     if (ss.docs.length === 0) {
-    //       this.message = "Cet élève n'a pas été trouvé. Merci d'essayer à nouveau ou de le contacter.";
-    //       this.single = null;
-    //     } else {
-    //       ss.docs.forEach(doc => {
-    //         this.message = 'elève trouvé!';
-    //         this.single = doc.data();
-    //         console.log("============================================");
-    //         // console.log(this.single);
-    //         this.tmp = this.single.table ;
-    //       })
-    //     }
-    //   });
-
-    // Find date
-    // find table 
-    // All students at this table more or less 10 minutes
-    // var citiesRef = this.firestore.collection(classe);
-    // var out = this.firestore.collection(classe, ref => ref.where("nom", "==",nom));
-    // out.get()
-    //   .subscribe(ss => {
-    //     if (ss.docs.length === 0) {
-    //       this.message = "Cet élève n'a pas été trouvé. Merci d'essayer à nouveau ou de le contacter.";
-    //       this.single = null;
-    //     } else {
-    //       ss.docs.forEach(doc => {
-    //         this.message = 'elève trouvé!';
-    //         this.single = doc.data();
-    //         console.log("============================================");
-    //         console.log(this.single);
-    //         this.tmp = this.single.nom + ', '+this.single.prenom;
-    //       })
-    //     }
-    //   })
   }
 }
 
+
+// TO : 
+//  can choose how far back want to get 
+//  fix double press button 
